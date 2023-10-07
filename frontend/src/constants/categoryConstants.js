@@ -1,0 +1,14 @@
+export const NEW_Category_REQUEST = "NEW_CATEGORY_REQUEST";
+export const NEW_Category_SUCCESS = "NEW_CATEGORY_SUCCESS";
+export const NEW_Category_RESET = "NEW_CATEGORY_RESET";
+export const NEW_Category_FAIL = "NEW_CATEGORY_FAIL";
+
+export const Get_All_Categories_SUCCESS = "GET_ALL_CATEGORY_SUCCESS";
+export const Get_ALl_Categories_FAIL = "GET_ALL_CATEGORY_FAIL";
+export const Get_ALl_Categories_REQUEST = "GET_ALL_CATEGORY_REQUEST";
+
+export const DELETE_CATGEORY_REQUEST = "DELETE_CATEGORY_REQUEST";
+export const DELETE_CATEGORY_SUCCESS = "DELETE_CATEGORY_SUCCESS";
+export const DELETE_CATEGORY_FAIL = "DELETE_CATEGORY_FAIL";
+export const DELETE_CATEGORY_RESET = "DELETE_CATEGORY_RESET";
+

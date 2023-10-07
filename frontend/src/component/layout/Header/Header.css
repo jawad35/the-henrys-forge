@@ -1,0 +1,45 @@
+.speedDial {
+  position: fixed;
+  right: 3vmax;
+  top: 5.5vmax;
+}
+
+.speedDialIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: 100%;
+}
+
+
+
+@media (max-width:1200px){
+  .speedDial {
+    position: fixed;
+    right: 3vmax;
+    top: 6vmax;
+  }
+}
+
+@media (max-width:1000px){
+  .speedDial {
+    position: fixed;
+    right: 3vmax;
+    top: 7vmax;
+  }
+}
+
+@media (max-width:900px){
+  .speedDial {
+    position: fixed;
+    right: 3vmax;
+    top: 8vmax;
+  }
+}
+
+@media (max-width:700px){
+  .speedDial {
+    position: fixed;
+    right: 3vmax;
+    top: 10vmax;
+  }
+}

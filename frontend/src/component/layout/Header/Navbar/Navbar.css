@@ -1,0 +1,163 @@
+.navbar {
+  background-color: white;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid wheat;
+  margin: 0px 10px;
+}
+
+.menu-bars {
+  font-size: 1.5rem;
+  background: none;
+  display: none;
+}
+
+.nav-menu {
+  background-color: white;
+  width: 250px;
+  height: 100vh;
+  display: flex;
+  box-shadow: 2px 5px 10px white;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  transition: 850ms;
+  z-index: 3;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  word-break: break-word;
+
+}
+
+.nav-menu.active {
+  left: 0;
+  transition: 350ms;
+}
+
+.nav-text {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  /* padding: 8px 0px 8px 16px; */
+  list-style: none;
+  height: 60px;
+}
+.nav-text-sidebar {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  /* padding: 8px 0px 8px 16px; */
+  list-style: none;
+}
+
+.nav-text-sidebar a {
+  text-decoration: none;
+  color: black;
+  font-size: 13px;
+  /* width: 95%; */
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  border-radius: 4px;
+}
+
+.side-navbartext {
+  height: 30px;
+}
+
+.nav-text a {
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+  width: 95%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  border-radius: 4px;
+}
+
+.nav-text a:hover {
+  background-color: tomato;
+  color: white;
+}
+
+.nav-menu-items {
+  width: 100%;
+}
+
+.icons-sec {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  color: black;
+  font-weight: bold;
+  width: 200px;
+}
+
+.icons-sec .icon {
+  font-size: 30px;
+  margin: 0px 10px;
+}
+
+.cart-number {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  color: white;
+  background-color: tomato;
+  font-size: 10px;
+  padding: 2px;
+  z-index: -1;
+}
+
+.navbar-toggle {
+  background-color: white;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.sidebar-text {
+  margin-left: 16px;
+}
+
+.backdrop {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.256);
+  position: fixed;
+  z-index: 2;
+}
+
+.h-navbar {
+  display: flex;
+}
+
+@media (max-width: 960px) {
+  .h-navbar {
+    display: none;
+  }
+
+  .menu-bars {
+    display: block;
+    margin-left: 10px;
+  }
+
+  .nav-text {
+    width: 150px;
+  }
+  .navbar {
+    margin: 0px;
+  }
+  .icons-sec .pro-icon {
+    margin-right: 20px;
+  }
+}
