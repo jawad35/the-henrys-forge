@@ -40,7 +40,7 @@ export const createCategory = (categoryData) => async (dispatch) => {
 export const getAdminCategories = () => async (dispatch) => {
     try {
       // dispatch({ type: Get_ALl_Categories_REQUEST });
-      const { data } = await axios.get("/api/v1/admin/categories");
+      const { data } = await axios.get(`${BASE_URL}/api/v1/admin/categories`);
       dispatch({
         type: Get_All_Categories_SUCCESS,
         payload: data,

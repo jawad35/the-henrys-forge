@@ -13,10 +13,9 @@ const PaypalPayment = ({history}) =>  {
   const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
 
-  console.log(orderInfo, shippingInfo, cartItems, "All")
   const createOrder= async(data) => {
     // Order is created on the server and the order id is returned
-    return fetch("/api/v1/orders", {
+    return fetch(`${BASE_URL}/api/v1/orders`, {
       method: "POST",
        headers: {
         "Content-Type": "application/json",

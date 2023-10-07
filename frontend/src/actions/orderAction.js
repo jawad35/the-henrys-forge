@@ -33,7 +33,7 @@ export const createDataBaseOrder = (order, history) => async (dispatch) => {
         "Content-Type": "application/json",
       },
     };
-    const { data } = await axios.post("/api/v1/order/new", order, config);
+    const { data } = await axios.post(`${BASE_URL}/api/v1/order/new`, order, config);
     if (data?.success) {
       dispatch({
         type: REMOVE_CART_ITEMS,
@@ -56,7 +56,7 @@ export const myOrders = () => async (dispatch) => {
   try {
     dispatch({ type: MY_ORDERS_REQUEST });
 
-    const { data } = await axios.get("/api/v1/orders/me");
+    const { data } = await axios.get(`${BASE_URL}/api/v1/orders/me`);
 
     dispatch({ type: MY_ORDERS_SUCCESS, payload: data.orders });
   } catch (error) {
@@ -72,7 +72,7 @@ export const getAllOrders = () => async (dispatch) => {
   try {
     dispatch({ type: ALL_ORDERS_REQUEST });
 
-    const { data } = await axios.get("/api/v1/admin/orders");
+    const { data } = await axios.get(`${BASE_URL}/api/v1/admin/orders`);
 
     dispatch({ type: ALL_ORDERS_SUCCESS, payload: data.orders });
   } catch (error) {
