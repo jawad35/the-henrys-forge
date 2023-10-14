@@ -1,49 +1,49 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import Header from "./component/layout/Header/Header.js";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import WebFont from "webfontloader";
 import React from "react";
-import Footer from "./component/layout/Footer/Footer";
-import Home from "./component/Home/Home";
-import ProductDetails from "./component/Product/ProductDetails";
-import Products from "./component/Product/Products";
-import LoginSignUp from "./component/User/LoginSignUp";
-import store from "./store";
-import { loadUser } from "./actions/userAction";
-import UserOptions from "./component/layout/Header/UserOptions";
-import { useSelector } from "react-redux";
-import Profile from "./component/User/Profile";
-import ProtectedRoute from "./component/Route/ProtectedRoute";
-import UpdateProfile from "./component/User/UpdateProfile";
-import UpdatePassword from "./component/User/UpdatePassword";
-import ForgotPassword from "./component/User/ForgotPassword";
-import ResetPassword from "./component/User/ResetPassword";
-import Cart from "./component/Cart/Cart";
-import Shipping from "./component/Cart/Shipping";
-import ConfirmOrder from "./component/Cart/ConfirmOrder";
-import axios from "axios";
-import Payment from "./component/Cart/Payment";
-import OrderSuccess from "./component/Cart/OrderSuccess";
-import MyOrders from "./component/Order/MyOrders";
-import OrderDetails from "./component/Order/OrderDetails";
-import Dashboard from "./component/Admin/Dashboard.js";
-import ProductList from "./component/Admin/ProductList.js";
-import CategoryList from "./component/Admin/CategoryList.js";
-import NewProduct from "./component/Admin/NewProduct";
-import NewCategory from "./component/Admin/NewCategory";
-import UpdateProduct from "./component/Admin/UpdateProduct";
-import OrderList from "./component/Admin/OrderList";
-import ProcessOrder from "./component/Admin/ProcessOrder";
-import UsersList from "./component/Admin/UsersList";
-import UpdateUser from "./component/Admin/UpdateUser";
-import ProductReviews from "./component/Admin/ProductReviews";
-import UploadBanner from './component/Admin/CreateBanner'
-import UpdateBanner from './component/Admin/UpdateBanner'
-import Contact from "./component/layout/Contact/Contact";
-import About from "./component/layout/About/About";
-import NotFound from "./component/layout/Not Found/NotFound";
 
+import { useSelector } from "react-redux";
+import { loadUser } from "./actions/userAction";
+import store from "./store";
+const  Cart = React.lazy(() => import("./component/Cart/Cart"));
+const  ForgotPassword = React.lazy(() => import("./component/User/ForgotPassword"));
+const  ResetPassword = React.lazy(() => import("./component/User/ResetPassword"));
+const  Payment = React.lazy(() => import("./component/Cart/Payment"));
+const  ConfirmOrder = React.lazy(() => import("./component/Cart/ConfirmOrder"));
+const  Shipping = React.lazy(() => import("./component/Cart/Shipping"));
+const  NewProduct = React.lazy(() => import("./component/Admin/NewProduct"));
+const  MyOrders = React.lazy(() => import("./component/Order/MyOrders"));
+const  OrderSuccess = React.lazy(() => import("./component/Cart/OrderSuccess"));
+const  CategoryList = React.lazy(() => import("./component/Admin/CategoryList.js"));
+const  ProductList = React.lazy(() => import("./component/Admin/ProductList.js"));
+const  Dashboard = React.lazy(() => import("./component/Admin/Dashboard.js"));
+const  OrderDetails = React.lazy(() => import("./component/Order/OrderDetails"));
+const  ProductReviews = React.lazy(() => import("./component/Admin/ProductReviews"));
+const  UpdateUser = React.lazy(() => import("./component/Admin/UpdateUser"));
+const  UsersList = React.lazy(() => import("./component/Admin/UsersList"));
+const  ProcessOrder = React.lazy(() => import("./component/Admin/ProcessOrder"));
+const  OrderList = React.lazy(() => import("./component/Admin/OrderList"));
+const  UpdateProduct = React.lazy(() => import("./component/Admin/UpdateProduct"));
+const  NewCategory = React.lazy(() => import("./component/Admin/NewCategory"));
+const  NotFound = React.lazy(() => import("./component/layout/Not Found/NotFound"));
+const  About = React.lazy(() => import("./component/layout/About/About"));
+const  Contact = React.lazy(() => import("./component/layout/Contact/Contact"));
+const  UpdateBanner = React.lazy(() => import("./component/Admin/UpdateBanner"));
+const  UploadBanner = React.lazy(() => import("./component/Admin/CreateBanner"));
+const  Footer = React.lazy(() => import("./component/layout/Footer/Footer"));
+const  Home = React.lazy(() => import("./component/Home/Home"));
+const  ProductDetails = React.lazy(() => import("./component/Product/ProductDetails"));
+const  Products = React.lazy(() => import("./component/Product/Products"));
+const  LoginSignUp = React.lazy(() => import("./component/User/LoginSignUp"));
+// const  loadUser = React.lazy(() => import("./actions/userAction/loadUser"));
+const  UserOptions = React.lazy(() => import("./component/layout/Header/UserOptions"));
+const  Profile = React.lazy(() => import("./component/User/Profile"));
+const  ProtectedRoute = React.lazy(() => import("./component/Route/ProtectedRoute"));
+const  UpdateProfile = React.lazy(() => import("./component/User/UpdateProfile"));
+const  UpdatePassword = React.lazy(() => import("./component/User/UpdatePassword"));
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
 
@@ -54,13 +54,14 @@ function App() {
       },
     });
 
-    store.dispatch(loadUser());
+    store?.dispatch(loadUser());
   }, []);
 
   window.addEventListener("contextmenu", (e) => e.preventDefault());
 
   return (
-    <Router>
+    <Suspense fallback={<div></div>}>
+      <Router>
       <Header />
 
       {isAuthenticated && <UserOptions user={user} />}
@@ -197,6 +198,7 @@ function App() {
       </Switch>
       <Footer />
     </Router>
+    </Suspense>
   );
 }
 
