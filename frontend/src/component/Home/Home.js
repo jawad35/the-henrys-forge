@@ -34,7 +34,35 @@ const Home = () => {
   }
   return (
     <Fragment>
-      <h1>hello</h1>
+      {loading ? (
+        <Loader />
+      ) : loadingb ? <Loader /> : (
+        <Fragment>
+          <MetaData title="the henrys forge" />
+
+          <div className="banner" style={{overflow:'hidden', width:'100%', maxHeight:'400px'}}>
+            <img style={{objectFit:'cover'}} src={banner[0].images[0].url} alt="Banner"/>
+            {/* <p style={{textTransform:'capitalize'}}>{banner[0].title}</p> */}
+            {/* <h1>{banner[0].description}</h1> */}
+            {/* <a href="#container">
+              <button>
+                Scroll <CgMouse />
+              </button>
+            </a> */}
+          </div>
+
+          <h2 className="homeHeading">Featured Products</h2>
+          <div className="container" id="container">
+            {products &&
+              products.slice(0, 20).map((product) => (
+                <ProductCard key={product._id} product={product} />
+              ))}
+          </div>
+          {/* <h2 className="homeHeading" style={{ cursor: 'pointer'}} onClick={() => window.location.href = "/products"}>Click To All Products</h2> */}
+
+        </Fragment>
+      )
+      }
     </Fragment>
   );
 };
