@@ -7,7 +7,9 @@
   font: 500 2vmax ;
   text-align: center;
 }
-
+.cateSearchBox{
+  margin-top: 20px;
+}
 .products {
   display: flex;
   flex-wrap: wrap;
@@ -123,7 +125,14 @@
 .sliderBox{
   display: flex;
 }
-
+.searchInput{
+  width: 100%;
+  padding: 15px;
+  border: 1px solid gainsboro;
+}
+.searchInput:focus{
+  outline: none;
+}
 @media screen and (max-width: 600px) {
   /* .filterBox {
     width: 20vmax;
