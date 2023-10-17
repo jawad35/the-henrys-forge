@@ -40,3 +40,19 @@ input[type="number"] {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+@import "../src/component/Admin/newProduct.css";
+@import "../src/component/Admin/dashboard.css";
+@import "../src/component/Admin/processOrder.css";
+@import "../src/component/Admin/productList.css";
+@import "../src/component/Product/ProductDetails.css";
+@import "../src/component/Product/Products.css";
+@import "../src/component/Product/Search.css";
+@import "../src/component/Order/myOrders.css";
+@import "../src/component/Cart/ConfirmOrder.css";
+
+
+
+
+
+

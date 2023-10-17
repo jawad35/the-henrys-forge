@@ -48,6 +48,10 @@ function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth', // Add smooth scrolling animation
+    });
     WebFont.load({
       google: {
         families: ["Roboto", "Droid Sans", "Chilanka"],
@@ -60,7 +64,7 @@ function App() {
   window.addEventListener("contextmenu", (e) => e.preventDefault());
 
   return (
-    <Suspense fallback={<div></div>}>
+    <Suspense fallback={<center style={{position:'absolute', top:'50%', right:'50%', transform:"transtlate(-50%,-50%)"}}>Loading..</center>}>
       <Router>
       <Header />
 
@@ -97,7 +101,7 @@ function App() {
 
         <Route exact path="/login" component={LoginSignUp} />
         <Route exact path="/cart" component={Cart} />
-        <Route exact path="*" component={NotFound} />
+        {/* <Route exact path="*" component={NotFound} /> */}
 
         <ProtectedRoute exact path="/shipping" component={Shipping} />
 

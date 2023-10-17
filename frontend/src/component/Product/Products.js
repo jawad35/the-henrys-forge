@@ -1,5 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import "./Products.css";
+import '../Admin/productList.css'
+import '../Home/Home.css'
 import { useSelector, useDispatch } from "react-redux";
 import { clearErrors } from "../../actions/productAction";
 import Loader from "../layout/Loader/Loader";

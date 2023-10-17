@@ -82,7 +82,7 @@ function Navbar() {
                     <span style={{textTransform:'capitalize'}}>Categories</span>
                 </li>
             <hr style={{width:'170px'}}/>
-            {categories.map((item, index) => {
+            {categories?.map((item, index) => {
               return (
                 <li key={index} className={`nav-text-sidebar side-navbartext`}>
                   <a href={`/products/${item.name}`}>

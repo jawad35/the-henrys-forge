@@ -26,7 +26,8 @@
 }
 
 .profileContainer > div:first-child > img {
-  width: 20vmax;
+  width: 200px;
+  height: 200px;
   border-radius: 100%;
   transition: all 0.5s;
   object-fit: cover;
@@ -102,6 +103,7 @@
   .profileContainer > div:first-child > h1 {
     font: 500 3.2vmax ;
     transform: translateY(-2vmax);
+    margin-top: 30px;
   }
 
   .profileContainer > div:first-child > a {

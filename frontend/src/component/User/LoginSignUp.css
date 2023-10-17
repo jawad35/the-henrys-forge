@@ -204,6 +204,6 @@
   .loginBtn,
   .signUpBtn {
     font: 300 1.9vmax ;
-    padding: 1.8vmax;
+    padding: 10px;
   }
 }

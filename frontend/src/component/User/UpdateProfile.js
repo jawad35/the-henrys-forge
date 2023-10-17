@@ -144,7 +144,7 @@ const UpdateProfile = ({ history }) => {
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
-                <img style={{ objectFit: 'contain', margin: '3px 0px' }} src={avatarPreview} width='150' alt="Avatar Preview" />
+                <img style={{ objectFit: 'contain', margin: '10px 0px' }} src={avatarPreview} width='150' alt="Avatar Preview" />
                 <div id="updateProfileImage">
                   <input
                     type="file"

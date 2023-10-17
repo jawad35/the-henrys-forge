@@ -89,6 +89,10 @@ const ProductDetails = ({ match }) => {
   };
 
   useEffect(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth', // Add smooth scrolling animation
+      });
     if (error) {
       alert.error(error);
       dispatch(clearErrors());

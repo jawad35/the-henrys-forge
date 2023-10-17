@@ -40,8 +40,8 @@ const Home = () => {
         <Fragment>
           <MetaData title="the henrys forge" />
 
-          <div className="banner" style={{overflow:'hidden', width:'100%', maxHeight:'400px'}}>
-            <img style={{objectFit:'cover'}} src={banner[0].images[0].url} alt="Banner"/>
+          <div className="banner">
+            <img src={banner[0]?.images[0]?.url} alt="Banner"/>
             {/* <p style={{textTransform:'capitalize'}}>{banner[0].title}</p> */}
             {/* <h1>{banner[0].description}</h1> */}
             {/* <a href="#container">
@@ -54,7 +54,7 @@ const Home = () => {
           <h2 className="homeHeading">Featured Products</h2>
           <div className="container" id="container">
             {products &&
-              products.slice(0, 20).map((product) => (
+              products.slice(0, 20)?.map((product) => (
                 <ProductCard key={product._id} product={product} />
               ))}
           </div>

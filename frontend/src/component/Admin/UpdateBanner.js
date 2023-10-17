@@ -152,11 +152,8 @@ const UploadBanner = ({ history }) => {
           <Button
             id="createProductBtn"
             type="submit"
-          disabled={loadingb}
           >
-             {
-                loadingb ? <div class="loader"></div> : "Update"
-              }
+             Update
           </Button>
         </form>
       </div>
