@@ -58,6 +58,7 @@ exports.getAdminProducts = catchAsyncErrors(async (req, res, next) => {
 
 // Get Product Details
 exports.getProductDetails = catchAsyncErrors(async (req, res, next) => {
+  console.log('deta cal')
   const product = await Product.findById(req.params.id);
 
   if (!product) {
