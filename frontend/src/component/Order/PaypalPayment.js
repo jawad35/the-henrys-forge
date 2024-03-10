@@ -15,7 +15,7 @@ const PaypalPayment = ({history}) =>  {
 
   const createOrder= async(data) => {
     // Order is created on the server and the order id is returned
-    return fetch(`${BASE_URL}/api/v1/orders`, {
+    return fetch(`/api/v1/orders`, {
       method: "POST",
        headers: {
         "Content-Type": "application/json",
@@ -35,7 +35,7 @@ const PaypalPayment = ({history}) =>  {
   }
   const onApprove = async (data) => {
      // Order is captured on the server
-     return fetch(`${BASE_URL}/api/v1/orders/${data.orderID}/capture`, {
+     return fetch(`/api/v1/orders/${data.orderID}/capture`, {
       method: "POST",
        headers: {
         "Content-Type": "application/json",

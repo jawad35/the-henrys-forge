@@ -11,7 +11,7 @@ export const createBanner = (productData) => async (dispatch) => {
       };
   
       const { data } = await axios.post(
-        `${BASE_URL}/api/v1/admin/banner/new`,
+        `/api/v1/admin/banner/new`,
         productData,
         config
       );
@@ -37,7 +37,7 @@ export const createBanner = (productData) => async (dispatch) => {
       };
   
       const { data } = await axios.get(
-        `${BASE_URL}/api/v1/admin/banner`,
+        `/api/v1/admin/banner`,
         config
       );
   
@@ -62,7 +62,7 @@ export const createBanner = (productData) => async (dispatch) => {
       };
   
       const { data } = await axios.post(
-        `${BASE_URL}/api/v1/admin/updatebanner`,
+        `/api/v1/admin/updatebanner`,
         bannerData,
         config
       );

@@ -19,7 +19,7 @@ export const createCategory = (categoryData) => async (dispatch) => {
       };
   
       const { data } = await axios.post(
-        `${BASE_URL}/api/v1/admin/category/new`,
+        `/api/v1/admin/category/new`,
         categoryData,
         config
       );
@@ -40,7 +40,7 @@ export const createCategory = (categoryData) => async (dispatch) => {
 export const getAdminCategories = () => async (dispatch) => {
     try {
       // dispatch({ type: Get_ALl_Categories_REQUEST });
-      const { data } = await axios.get(`${BASE_URL}/api/v1/admin/categories`);
+      const { data } = await axios.get(`/api/v1/admin/categories`);
       dispatch({
         type: Get_All_Categories_SUCCESS,
         payload: data,
@@ -56,7 +56,7 @@ export const getAdminCategories = () => async (dispatch) => {
   // Delete Category
 export const deleteCategory = (id) => async (dispatch) => {
   try {
-    const { data } = await axios.delete(`${BASE_URL}/api/v1/admin/category/${id}`);
+    const { data } = await axios.delete(`/api/v1/admin/category/${id}`);
     dispatch({
       type: DELETE_CATEGORY_SUCCESS,
       payload: data,

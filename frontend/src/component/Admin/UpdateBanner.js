@@ -117,7 +117,7 @@ const UploadBanner = ({ history }) => {
       };
 
       const { data } = await axios.get(
-        `${BASE_URL}/api/v1/admin/banner`,
+        `/api/v1/admin/banner`,
         config
       );
       setImagesPreview(data.banner[0].images)
