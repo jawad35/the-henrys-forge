@@ -26,7 +26,7 @@ const Shipping = ({ history }) => {
   const [pinCode, setPinCode] = useState(shippingInfo.pinCode);
   const [phoneNo, setPhoneNo] = useState(shippingInfo.phoneNo);
   const [isvalidPN, setIsValidPN] = useState(false)
-  const [country_code, setCountrycode] = useState('')
+  const [country_code, setCountrycode] = useState('US')
 
 
   const checkValidPhoneNumber = (PN) => {
@@ -54,29 +54,29 @@ const Shipping = ({ history }) => {
     );
     history.push("/order/confirm");
   };
-  const getGeoInfo = async () => {
-    try {
-      const response = await fetch('https://ipapi.co/json/', { mode: 'cors' });
+  // const getGeoInfo = async () => {
+  //   try {
+  //     const response = await fetch('https://ipapi.co/json/', { mode: 'cors' });
   
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+  //     if (!response.ok) {
+  //       throw new Error(`HTTP error! status: ${response.status}`);
+  //     }
   
-      const data = await response.json();
-      console.log("Country is : ", data);
-      setCountrycode(data.country_code);
-    } catch (error) {
-      console.log('Request failed:', error);
-      // Fallback to a default or allow the user to manually select
-      setCountrycode('US'); // Fallback to 'US' as a default, or handle appropriately
-    }
-  };
+  //     const data = await response.json();
+  //     console.log("Country is : ", data);
+  //     setCountrycode(data.country_code);
+  //   } catch (error) {
+  //     console.log('Request failed:', error);
+  //     // Fallback to a default or allow the user to manually select
+  //     setCountrycode('US'); // Fallback to 'US' as a default, or handle appropriately
+  //   }
+  // };
   
-  useEffect(() => {
-    getGeoInfo()
-  }, [])
+  // useEffect(() => {
+  //   getGeoInfo()
+  // }, [])
 
-  console.log(country_code, 'kalk')
+  // console.log(country_code, 'kalk')
 
   return (
     <Fragment>
