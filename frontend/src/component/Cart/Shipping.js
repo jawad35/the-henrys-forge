@@ -54,16 +54,24 @@ const Shipping = ({ history }) => {
     );
     history.push("/order/confirm");
   };
-  const getGeoInfo = () => {
-    fetch('https://ipapi.co/json/')
-    .then( res => res.json())
-    .then(response => {
-     console.log("Country is : ", response);
-   })
-   .catch((data, status) => {
-     console.log('Request failed:', data);
-   });
-};
+  const getGeoInfo = async () => {
+    try {
+      const response = await fetch('https://ipapi.co/json/', { mode: 'cors' });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      console.log("Country is : ", data);
+      setCountrycode(data.country_code);
+    } catch (error) {
+      console.log('Request failed:', error);
+      // Fallback to a default or allow the user to manually select
+      setCountrycode('US'); // Fallback to 'US' as a default, or handle appropriately
+    }
+  };
+  
   useEffect(() => {
     getGeoInfo()
   }, [])
