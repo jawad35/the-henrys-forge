@@ -11,7 +11,7 @@ const ProductCard = ({ product }) => {
   return (
     <Link className="productCard" to={`/product/${product._id}`}>
       <img style={{objectFit:'cover', boxShadow:"5px 1px 10px gray", borderRadius:'10px 10px 0px 0px'}} src={product.images[0].url} alt={product.name} />
-      <p style={{textTransform:'capitalize'}}>{product.name.length > 75 ?product.name.slice(0,50) +"...read more" :product.name}</p>
+      <p style={{textTransform:'capitalize'}}>{product.name.length > 40 ?product.name.slice(0,40) +"...read more" :product.name}</p>
       <div>
         <Rating {...options} />
         <p className="productCardSpan">

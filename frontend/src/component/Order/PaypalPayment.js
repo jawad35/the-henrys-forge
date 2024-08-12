@@ -1,74 +1,84 @@
+// import React from "react";
+// import ReactDOM from "react-dom";
+// import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+// import { createDataBaseOrder } from "../../actions/orderAction";
+// import { useDispatch, useSelector } from "react-redux";
+// import { useAlert } from "react-alert";
+// import axios from "axios";
 
-import React from "react";
-import ReactDOM from "react-dom"
-import { PayPalButtons } from "@paypal/react-paypal-js";
-import { createDataBaseOrder } from "../../actions/orderAction";
-import { useDispatch, useSelector } from "react-redux";
-import { useAlert } from "react-alert";
-import { BASE_URL } from "../../globalUrl/Urls";
+// const StripePayment = ({ history }) => {
+//   const alert = useAlert();
+//   const dispatch = useDispatch();
+//   const stripe = useStripe();
+//   const elements = useElements();
+//   const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
+//   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
 
-const PaypalPayment = ({history}) =>  {
-  const alert = useAlert();
-  const dispatch = useDispatch()
-  const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
-  const { shippingInfo, cartItems } = useSelector((state) => state.cart);
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
 
-  const createOrder= async(data) => {
-    // Order is created on the server and the order id is returned
-    return fetch(`/api/v1/orders`, {
-      method: "POST",
-       headers: {
-        "Content-Type": "application/json",
-      },
-      // use the "body" param to optionally pass additional order information
-      // like product skus and quantities
-      body: JSON.stringify({
-        cart: [
-          {
-            amount: orderInfo?.subtotal,
-          },
-        ],
-      }),
-    })
-    .then((response) => response.json())
-    .then((order) => order.id);
-  }
-  const onApprove = async (data) => {
-     // Order is captured on the server
-     return fetch(`/api/v1/orders/${data.orderID}/capture`, {
-      method: "POST",
-       headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        orderID: data.orderID
-      })
-    })
-    .then((response) => response.json()).then(item => {
-      console.log(item, "data56")
-      try {
-            const Order = {
-              shippingInfo,
-              orderItems: cartItems,
-              itemsPrice: orderInfo.subtotal,
-              shippingPrice: orderInfo.shippingCharges,
-              totalPrice: orderInfo.totalPrice,
-            }
-            if (item?.status === "COMPLETED") {
-              Order.paymentInfo = {
-                id: item?.id,
-                status: item?.status,
-              };
-              dispatch(createDataBaseOrder(Order, history))
-           }} catch (error) {
-      alert.error("Something went wrong!");
-    }
-    });
-  }
-    return (
-        <PayPalButtons  createOrder={(data, actions) => createOrder(data)}
-        onApprove={(data, actions) => onApprove(data)} style={{ layout: "horizontal" }} />
-    );
-}
+//     if (!stripe || !elements) {
+//       return;
+//     }
 
-export default PaypalPayment
+//     const cardElement = elements.getElement(CardElement);
+
+//     try {
+//       const { data: clientSecret } = await axios.post("/api/v1/payment", {
+//         amount: Math.round(orderInfo.totalPrice * 100), // Stripe works with the smallest currency unit (cents for USD)
+//       });
+
+//       const paymentResult = await stripe.confirmCardPayment(clientSecret, {
+//         payment_method: {
+//           card: cardElement,
+//           billing_details: {
+//             name: shippingInfo.name,
+//             email: shippingInfo.email,
+//             address: {
+//               line1: shippingInfo.address,
+//               city: shippingInfo.city,
+//               state: shippingInfo.state,
+//               postal_code: shippingInfo.postalCode,
+//               country: shippingInfo.country,
+//             },
+//           },
+//         },
+//       });
+
+//       if (paymentResult.error) {
+//         alert.error(paymentResult.error.message);
+//       } else {
+//         if (paymentResult.paymentIntent.status === "succeeded") {
+//           const Order = {
+//             shippingInfo,
+//             orderItems: cartItems,
+//             itemsPrice: orderInfo.subtotal,
+//             shippingPrice: orderInfo.shippingCharges,
+//             totalPrice: orderInfo.totalPrice,
+//             paymentInfo: {
+//               id: paymentResult.paymentIntent.id,
+//               status: paymentResult.paymentIntent.status,
+//             },
+//           };
+
+//           dispatch(createDataBaseOrder(Order, history));
+//         } else {
+//           alert.error("Payment failed. Please try again.");
+//         }
+//       }
+//     } catch (error) {
+//       alert.error(error.response?.data?.message || "Something went wrong!");
+//     }
+//   };
+
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       <CardElement />
+//       <button type="submit" disabled={!stripe}>
+//         Pay Now
+//       </button>
+//     </form>
+//   );
+// };
+
+// export default StripePayment;

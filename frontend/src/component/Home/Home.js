@@ -54,12 +54,13 @@ const Home = () => {
           <h2 className="homeHeading">Featured Products</h2>
           <div className="container" id="container">
             {products &&
-              products.slice(0, 20)?.map((product) => (
+              products.slice(0, 40)?.map((product) => (
                 <ProductCard key={product._id} product={product} />
               ))}
           </div>
-          {/* <h2 className="homeHeading" style={{ cursor: 'pointer'}} onClick={() => window.location.href = "/products"}>Click To All Products</h2> */}
-
+          <div style={{display:'flex', justifyContent:'center'}}>
+            <button className="homeHeading" style={{ cursor: 'pointer'}} onClick={() => window.location.href = "/products"}>All Products</button>
+          </div>
         </Fragment>
       )
       }

@@ -1,0 +1,2 @@
+(this.webpackJsonpfrontend=this.webpackJsonpfrontend||[]).push([[49],{303:function(e,s,c){},381:function(e,s,c){"use strict";c.r(s);c(1);var r=c(304),n=c.n(r),t=(c(303),c(183)),d=c(15),a=c(2);s.default=()=>Object(a.jsxs)("div",{className:"orderSuccess",children:[Object(a.jsx)(n.a,{}),Object(a.jsx)(t.a,{children:"Your Order has been Placed successfully "}),Object(a.jsx)(d.b,{to:"/orders",children:"View Orders"})]})}}]);
+//# sourceMappingURL=49.f80a42e3.chunk.js.map

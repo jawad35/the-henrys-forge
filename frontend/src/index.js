@@ -7,7 +7,10 @@ import store from "./store";
 import { positions, transitions, Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 import { BrowserRouter } from "react-router-dom";
-import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+
+const stripePromise = loadStripe("pk_test_51Pl8n9RxBlDkSARFYJ6MqEDiSgsI65Dxff9ueiZdCXOhFznS8DS2ibUE7EAjggsUoWVIgvWGPo12sj7o9QkST3Ab00aJAbkyaz");
 
 const options = {
   timeout: 5000,
@@ -19,9 +22,9 @@ ReactDOM.render(
   <Provider store={store}>
     <AlertProvider template={AlertTemplate} {...options}>
       <BrowserRouter>
-      <PayPalScriptProvider options={{ clientId: "AfgE3q2-w90woBhMTTiP4doq5EIHcZz9-noW9Gjo2MDDLmm_Zv6JEHiFjJ1h-EQQB1zY8tYlXPLtJ9zV" }}>
-        <App />
-      </PayPalScriptProvider>
+        <Elements stripe={stripePromise}>
+          <App />
+        </Elements>
       </BrowserRouter>
     </AlertProvider>
   </Provider>,

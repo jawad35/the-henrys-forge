@@ -1,4 +1,3 @@
-import { REMOVE_CART_ITEMS } from "../constants/cartConstants";
 import {
   CREATE_ORDER_REQUEST,
   CREATE_ORDER_SUCCESS,
@@ -22,25 +21,18 @@ import {
 } from "../constants/orderConstants";
 
 import axios from "axios";
-import { BASE_URL } from "../globalUrl/Urls";
 
 // Create Order
-export const createDataBaseOrder = (order, history) => async (dispatch) => {
+export const createOrder = (order) => async (dispatch) => {
   try {
     dispatch({ type: CREATE_ORDER_REQUEST });
+
     const config = {
       headers: {
         "Content-Type": "application/json",
       },
     };
-    const { data } = await axios.post(`/api/v1/order/new`, order, config);
-    if (data?.success) {
-      dispatch({
-        type: REMOVE_CART_ITEMS,
-        data: [],
-      });
-      history.push("/success")
-    }
+    const { data } = await axios.post("/api/v1/order/new", order, config);
 
     dispatch({ type: CREATE_ORDER_SUCCESS, payload: data });
   } catch (error) {
@@ -56,7 +48,7 @@ export const myOrders = () => async (dispatch) => {
   try {
     dispatch({ type: MY_ORDERS_REQUEST });
 
-    const { data } = await axios.get(`/api/v1/orders/me`);
+    const { data } = await axios.get("/api/v1/orders/me");
 
     dispatch({ type: MY_ORDERS_SUCCESS, payload: data.orders });
   } catch (error) {
@@ -72,7 +64,7 @@ export const getAllOrders = () => async (dispatch) => {
   try {
     dispatch({ type: ALL_ORDERS_REQUEST });
 
-    const { data } = await axios.get(`/api/v1/admin/orders`);
+    const { data } = await axios.get("/api/v1/admin/orders");
 
     dispatch({ type: ALL_ORDERS_SUCCESS, payload: data.orders });
   } catch (error) {
@@ -84,7 +76,7 @@ export const getAllOrders = () => async (dispatch) => {
 };
 
 // Update Order
-export const updateOrder = (id, status) => async (dispatch) => {
+export const updateOrder = (id, order) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_ORDER_REQUEST });
 
@@ -93,9 +85,9 @@ export const updateOrder = (id, status) => async (dispatch) => {
         "Content-Type": "application/json",
       },
     };
-    const { data } = await axios.post(
+    const { data } = await axios.put(
       `/api/v1/admin/order/${id}`,
-      {status},
+      order,
       config
     );
 

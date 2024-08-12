@@ -1,65 +1,125 @@
-import React, { Fragment} from "react";
+import React, { Fragment, useEffect, useRef } from "react";
 import CheckoutSteps from "../Cart/CheckoutSteps";
-// import { PayPalButton } from 'react-paypal-button-v2'
+import { useSelector, useDispatch } from "react-redux";
 import MetaData from "../layout/MetaData";
+import { Typography } from "@material-ui/core";
 import { useAlert } from "react-alert";
+import {
+  CardNumberElement,
+  CardCvcElement,
+  CardExpiryElement,
+  useStripe,
+  useElements,
+} from "@stripe/react-stripe-js";
+
+import axios from "axios";
 import "./payment.css";
-import { useDispatch, useSelector } from "react-redux";
-import { createOrder } from "../../actions/orderAction";
-import PaypalPayment from "../Order/PaypalPayment";
+import CreditCardIcon from "@material-ui/icons/CreditCard";
+import EventIcon from "@material-ui/icons/Event";
+import VpnKeyIcon from "@material-ui/icons/VpnKey";
+import { createOrder, clearErrors } from "../../actions/orderAction";
+
 const Payment = ({ history }) => {
   const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
-  // const shippingInfo = JSON.parse(sessionStorage.getItem("shippingInfo"));
-  const { shippingInfo, cartItems } = useSelector((state) => state.cart);
-  const alert = useAlert();
-  const dispatch = useDispatch()
-  // const SuccessHandler = (details, data) => {
-  //   try {
-  //     const Order = {
-  //       shippingInfo,
-  //       orderItems: cartItems,
-  //       itemsPrice: orderInfo.subtotal,
-  //       shippingPrice: orderInfo.shippingCharges,
-  //       totalPrice: orderInfo.totalPrice,
-  //     }
-  //     if (details.status === "COMPLETED") {
-  //       Order.paymentInfo = {
-  //         id: details.id,
-  //         status: details.status,
-  //       };
 
-  //       dispatch(createOrder(Order));
-  //       // // localStorage.removeItem("cartItems")
-  //       // sessionStorage.removeItem("orderInfo")
-  //       // localStorage.removeItem("shippingInfo")
-  //       history.push("/success");
-  //     } else {
-  //       alert.error("There's some issue while processing payment ");
-  //     }
-  //   } catch (error) {
-  //     alert.error(error.response.data.message);
-  //   }
-  // }
+  const dispatch = useDispatch();
+  const alert = useAlert();
+  const stripe = useStripe();
+  const elements = useElements();
+  const payBtn = useRef(null);
+
+  const { shippingInfo, cartItems } = useSelector((state) => state.cart);
+  const { user } = useSelector((state) => state.user);
+  const { error } = useSelector((state) => state.newOrder);
+
+  const paymentData = {
+    amount: Math.round(orderInfo.totalPrice * 100),
+  };
+
+  const order = {
+    shippingInfo,
+    orderItems: cartItems,
+    itemsPrice: orderInfo.subtotal,
+    taxPrice: orderInfo.tax,
+    shippingPrice: orderInfo.shippingCharges,
+    totalPrice: orderInfo.totalPrice,
+  };
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+
+    payBtn.current.disabled = true;
+
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const { data } = await axios.post(
+        "/api/v1/payment/process",
+        paymentData,
+        config
+      );
+
+      const client_secret = data.client_secret;
+
+      if (!stripe || !elements) return;
+
+      const result = await stripe.confirmCardPayment(client_secret, {
+        payment_method: {
+          card: elements.getElement(CardNumberElement),
+          billing_details: {
+            name: user.name,
+            email: user.email,
+            address: {
+              line1: shippingInfo.address,
+              city: shippingInfo.city,
+              state: shippingInfo.state,
+              postal_code: shippingInfo.pinCode,
+              country: shippingInfo.country,
+            },
+          },
+        },
+      });
+
+      if (result.error) {
+        payBtn.current.disabled = false;
+
+        alert.error(result.error.message);
+      } else {
+        if (result.paymentIntent.status === "succeeded") {
+          order.paymentInfo = {
+            id: result.paymentIntent.id,
+            status: result.paymentIntent.status,
+          };
+
+          dispatch(createOrder(order));
+
+          history.push("/success");
+        } else {
+          alert.error("There's some issue while processing payment ");
+        }
+      }
+    } catch (error) {
+      payBtn.current.disabled = false;
+      alert.error(error.response.data.message);
+    }
+  };
+
+  useEffect(() => {
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
+    }
+  }, [dispatch, error, alert]);
+
   return (
     <Fragment>
       <MetaData title="Payment" />
       <CheckoutSteps activeStep={2} />
       <div className="paymentContainer">
-        <div className="" style={{position:'static', height:'auto'}}>
-      <PaypalPayment history={history} />
-          {/* <PayPalButton
-            amount={orderInfo.totalPrice}
-            options={{
-              clientId:
-                "AZW9WgswGTvvjDQ3zwxftBUTlXNIvz3f2YZrjRHxWxBJjhkoPDU8ybQF0TsPtN17PWtNuoqsIFdz-1Pj"
-            }}
-            onSuccess={(details, data) => {
-              SuccessHandler(details, data)
-            }}
-
-          /> */}
-        </div>
-        {/* <form className="paymentForm" onSubmit={(e) => submitHandler(e)}>
+        <form className="paymentForm" onSubmit={(e) => submitHandler(e)}>
           <Typography>Card Info</Typography>
           <div>
             <CreditCardIcon />
@@ -80,7 +140,7 @@ const Payment = ({ history }) => {
             ref={payBtn}
             className="paymentFormBtn"
           />
-        </form> */}
+        </form>
       </div>
     </Fragment>
   );
