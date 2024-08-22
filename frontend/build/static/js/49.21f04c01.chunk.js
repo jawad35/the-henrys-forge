@@ -1,0 +1,2 @@
+(this.webpackJsonpfrontend=this.webpackJsonpfrontend||[]).push([[49],{314:function(e,t,i){},395:function(e,t,i){"use strict";i.r(t);i(1),i(314);var r=i(2);t.default=()=>Object(r.jsx)("footer",{id:"footer",children:Object(r.jsxs)("div",{className:"midFooter",children:[Object(r.jsx)("p",{children:"High Quality is our first priority"}),Object(r.jsx)("p",{children:"Copyrights 2022 \xa9 thehenrysforge"})]})})}}]);
+//# sourceMappingURL=49.21f04c01.chunk.js.map
