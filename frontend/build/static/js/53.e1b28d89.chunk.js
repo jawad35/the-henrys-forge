@@ -1,2 +1,0 @@
-(this.webpackJsonpfrontend=this.webpackJsonpfrontend||[]).push([[53],{311:function(e,n,t){},393:function(e,n,t){"use strict";t.r(n);t(1);var s=t(312),c=t.n(s),o=(t(311),t(183)),a=t(15),d=t(2);n.default=()=>Object(d.jsxs)("div",{className:"PageNotFound",children:[Object(d.jsx)(c.a,{}),Object(d.jsx)(o.a,{children:"Page Not Found "}),Object(d.jsx)(a.b,{to:"/",children:"Home"})]})}}]);
-//# sourceMappingURL=53.e1b28d89.chunk.js.map

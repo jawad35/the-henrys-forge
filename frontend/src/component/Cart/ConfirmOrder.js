@@ -15,7 +15,7 @@ const ConfirmOrder = ({ history }) => {
     0
   );
 
-  const shippingCharges = 0;
+  const shippingCharges = cartItems.reduce((acc, item) => acc + item.quantity, 0)*30;
   const totalPrice = subtotal + shippingCharges;
   const address = `${shippingInfo.address}, ${shippingInfo.city}, ${shippingInfo.state}, ${shippingInfo.pinCode}, ${shippingInfo.country}`;
 
@@ -82,6 +82,16 @@ const ConfirmOrder = ({ history }) => {
                 <p>Subtotal:</p>
                 <span>${subtotal}</span>
               </div>
+              <div>
+                <span>
+                 Each item's shipping cost will be $30.
+                </span>
+              </div>
+              <div>
+                <p>Shipping:</p>
+                <span>${shippingCharges}</span>
+              </div>
+              
             </div>
 
             <div className="orderSummaryTotal">

@@ -14,11 +14,14 @@ import MetaData from "../layout/MetaData";
 import axios from "axios";
 import moment from 'moment'
 import { useParams } from "react-router-dom";
+import { GetBanner } from "../../actions/bannerAction";
 const Products = ({ match }) => {
   const dispatch = useDispatch();
   const { keyword } = useParams()
   const alert = useAlert();
   const { categories } = useSelector((state) => state.categories);
+  const { loadingb,banner } = useSelector((state) => state.banner);
+
   const {
     error
   } = useSelector((state) => state.products);
@@ -53,6 +56,11 @@ const Products = ({ match }) => {
     setProducts(AllProducts.slice(e * perPageItems - perPageItems, e * perPageItems))
     setCurrentPage(e);
   };
+  useEffect(() => {
+    try {
+      dispatch(GetBanner())
+    } catch (error) {}
+  }, [dispatch])
   const GetProducts = () => {
     axios.get('/api/v1/products')
       .then((res) => {
@@ -81,6 +89,7 @@ const Products = ({ match }) => {
     GetProducts()
     setCategory("axe")
   }, [dispatch, alert, error]);
+  
   return (
     <Fragment>
       {loading ? (
@@ -88,6 +97,11 @@ const Products = ({ match }) => {
       ) : (
         <div style={{overflow:'hidden'}}>
           <MetaData title="PRODUCTS -- the henrys forge" />
+          <div className="banner">
+            {
+              loadingb ? <Loader/> : <img src={banner[0]?.images[0]?.url} alt="Banner"/>
+            }
+          </div>
           <div className="cateSearchBox" style={{ background: 'white' }}>
 
             {/* <input className="searchbtn" type="button" value="Search" onClick={() => filteredListProduct()}/> */}

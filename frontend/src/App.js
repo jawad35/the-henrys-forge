@@ -34,7 +34,7 @@ const  Contact = React.lazy(() => import("./component/layout/Contact/Contact"));
 const  UpdateBanner = React.lazy(() => import("./component/Admin/UpdateBanner"));
 const  UploadBanner = React.lazy(() => import("./component/Admin/CreateBanner"));
 const  Footer = React.lazy(() => import("./component/layout/Footer/Footer"));
-const  Home = React.lazy(() => import("./component/Home/Home"));
+// const  Home = React.lazy(() => import("./component/Home/Home"));
 const  ProductDetails = React.lazy(() => import("./component/Product/ProductDetails"));
 const  Products = React.lazy(() => import("./component/Product/Products"));
 const  LoginSignUp = React.lazy(() => import("./component/User/LoginSignUp"));
@@ -74,9 +74,9 @@ function App() {
       <ProtectedRoute exact path="/process/payment" component={Payment} />
 
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" component={Products} />
         <Route exact path="/product/:id" component={ProductDetails} />
-        <Route exact path="/products" component={Products} />
+        {/* <Route exact path="/products" component={Products} /> */}
         <Route exact path="/products/:keyword" component={Products} />
 
         {/* <Route exact path="/search" component={Search} /> */}

@@ -1,14 +1,14 @@
 const menuItems= [
   {
-    title: 'Home',
+    title: 'Products',
     path: '/',
     cName: 'nav-text'
   },
-  {
-    title: 'Products',
-    path: '/products',
-    cName: 'nav-text'
-  },
+  // {
+  //   title: 'Products',
+  //   path: '/products',
+  //   cName: 'nav-text'
+  // },
   {
     title: 'Contact Us',
     path: '/contact',
